@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.justice.gov.uk/magistrates/MAP/Result" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/Result" targetNamespace="http://www.justice.gov.uk/magistrates/MAP/Result" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+
+			CGI IT UK Limited. A CGI Group Inc. Company 
+			Registered Office: 250 Brook Drive, 
+			Green Park, Re
+			ading RG2 6UA, 
+			United Kingdom. 
+			
+			Registered in England and Wales - Number 947968
+			
+			0.1 - DD - 05/03/2015 - Initial draft
+			0.2 - DD - 23/03/2015 - valided XMLForest
+			0.3 - DD - 23/03/2015 - updated following review comment and update from DW
+			0.4 - DD - 23/03/2015 - valided XMLForest
+			0.5 - DD - 31/03/2015 - unqualified XML
+			0.6 - DD - 08/04/2015 - Set optionality
+			0.7 - DD - 21/04/2015 - MAP Beta changes
+			0.8 - DD - 21/05/2015 - TRAC Defects #486,#487,#488
+			0.9 - DD - 30/09/2015 - SJP Data
+			
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--======================-->
+	<!-- RESULT DEFINITIONS           -->
+	<!--======================-->
+	<xsd:element name="Result">
+		<xsd:annotation>
+			<xsd:documentation>Schema defining the elements in a Result</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ResultType" type="tns:ResultType" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--======================-->
+	<!-- RESULT INFORMATION       -->
+	<!--======================-->
+	<xsd:complexType name="ResultType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Result Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LibraCaseType" type="tns:LibraCaseType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="LibraResultOffence" type="tns:LibraResultOffence" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="LibraPaymentTerm" type="tns:LibraPaymentTerm" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--=========================-->
+	<!-- LIBRA RESULT OFFENCE          -->
+	<!--=========================-->
+	<xsd:complexType name="LibraResultOffence">
+		<xsd:annotation>
+			<xsd:documentation>Libra Result Offence Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LibraResultData" type="tns:LibraResultData" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="LibraOffenceType" type="tns:LibraOffenceType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--=========================-->
+	<!-- LIBRA RESULT DATA                 -->
+	<!--=========================-->
+	<xsd:complexType name="LibraResultData">
+		<xsd:annotation>
+			<xsd:documentation>Libra Result Data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ResultCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ResultShortTitle" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="ResultShortTitleWelsh" type="xsd:string" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RegisterWording" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="RegisterWordingWelsh" type="xsd:string" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--=========================-->
+	<!-- PAYMENT TERM                       -->
+	<!--=========================-->
+	<xsd:complexType name="LibraPaymentTerm">
+		<xsd:annotation>
+			<xsd:documentation>Libra Offence Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AccountNumber" type="xsd:string" minOccurs="0" maxOccurs="1">
+							<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Division" type="xsd:string" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InstalmentAmount" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="LumpSumAmount" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PayByDate" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="PaymentType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--=========================-->
+	<!-- OFFENCE INFORMATION           -->
+	<!--=========================-->
+	<xsd:complexType name="LibraOffenceType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Offence Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OffenceCode" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OffenceSequenceNumber" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--======================-->
+	<!-- CASE INFORMATION           -->
+	<!--======================-->
+	<xsd:complexType name="LibraCaseType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Case Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CaseNumber" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="12"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CaseURN" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OUCode" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="7"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DateOfHearing" type="xsd:date" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

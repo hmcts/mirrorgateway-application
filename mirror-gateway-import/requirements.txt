@@ -1,0 +1,7 @@
+boto3==1.17.48
+emails==0.5.2
+lxml==3.4.0
+requests==2.7.0
+djangorestframework==2.4.3
+python-gnupg
+mock==3.0.5

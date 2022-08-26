@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Cases xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/Case">
+   <Case>
+      <LibraDefendantType>
+         <PersonEntityType>
+            <OrganisationName />
+            <Title />
+            <Forename1 />
+            <Forename2 />
+            <Forename3 />
+            <Surname>ATwoSurname</Surname>
+            <DOB>1971-01-01</DOB>
+            <Gender>M</Gender>
+            <Address1>A Two address</Address1>
+            <Address2 />
+            <Address3 />
+            <Address4 />
+            <Address5 />
+            <Postcode>a123</Postcode>
+            <NINO />
+            <DriverNumber />
+            <VehicleRegistration />
+            <TelephoneNumberBusiness />
+            <TelephoneNumberHome />
+            <TelephoneNumberMobile />
+            <EmailAddress1 />
+            <EmailAddress2 />
+         </PersonEntityType>
+         <DocumentLanguage>EN</DocumentLanguage>
+         <HearingLanguage>EN</HearingLanguage>
+      </LibraDefendantType>
+      <LibraHearingType>
+         <SessionTimes>09:00-13:00</SessionTimes>
+      </LibraHearingType>
+      <LibraCaseType>
+         <CaseNumber>061000000045</CaseNumber>
+         <CaseURN>00/AA/00000/00</CaseURN>
+         <OUCode>B06IS00</OUCode>
+         <CaseInitiationType>C</CaseInitiationType>
+      </LibraCaseType>
+      <LibraOffenceType>
+         <OffenceCode>TH68001</OffenceCode>
+         <OffenceShortTitle>Theft from the person of another</OffenceShortTitle>
+         <OffenceWording>Contrary to Section 1(1) and 7 of the Theft Act 1968.</OffenceWording>
+         <OffenceSequenceNumber />
+      </LibraOffenceType>
+      <LibraOffenceType>
+         <OffenceCode>TH68001</OffenceCode>
+         <OffenceShortTitle>Theft from the person of another</OffenceShortTitle>
+         <OffenceWording>On 26/08/2010 at asdf stole asdfklj asdflkj  to the value of £123 belonging to asdflkj asdflkj .</OffenceWording>
+         <OffenceSequenceNumber />
+      </LibraOffenceType>
+   </Case>
+</tns:Cases>

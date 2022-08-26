@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="MAP-Encryption" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="MapGatewayBinding" type="wsdl" bindingName="{http://www.justice.gov.uk/magistrates/map/MAPSoapGateway}MapGatewayBinding" soapVersion="1_2" anonymous="optional" definition="file:/C:/development/LibraMaat/MAP/CommonCode/trunk/app/wsdl-xsd/src/main/resources/wsdl/MAPSoapGateway.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\wsdl\MAPSoapGateway.wsdl"><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\wsdl\MAPSoapGateway.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MAPSoapGateway" targetNamespace="http://www.justice.gov.uk/magistrates/map/MAPSoapGateway" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.justice.gov.uk/magistrates/map/MAPSoapGateway" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sgw-msg="http://www.justice.gov.uk/magistrates/map/CSCI" xmlns:map-case="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:map-results="http://www.justice.gov.uk/magistrates/MAP/Result" xmlns:ack="http://www.justice.gov.uk/magistrates/ack">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.justice.gov.uk/magistrates/MAP/CSCI" schemaLocation="../xsd/map/CSCI.xsd"/>
+      <xsd:import namespace="http://www.justice.gov.uk/magistrates/generic/SchemaHeader" schemaLocation="../xsd/generic/SchemaHeader.xsd"/>
+      <xsd:import namespace="http://www.justice.gov.uk/magistrates/ack" schemaLocation="../xsd/generic/Acknowledgement/Acknowledgement.xsd"/>
+      <xsd:import namespace="http://www.justice.gov.uk/magistrates/MAP/Case" schemaLocation="../xsd/map/SendCase/SendCase.xsd"/>
+      <xsd:import namespace="http://www.justice.gov.uk/magistrates/MAP/Result" schemaLocation="../xsd/map/SendResults/SendResults.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="iSendCase">
+    <wsdl:part name="iSendCase" element="map-case:Cases"/>
+  </wsdl:message>
+  <wsdl:message name="iSendResults">
+    <wsdl:part name="iSendResults" element="map-results:Result"/>
+  </wsdl:message>
+  <wsdl:message name="iSendCaseResponse">
+    <wsdl:part name="iSendCaseResponse" element="ack:Acknowledgement"/>
+  </wsdl:message>
+  <wsdl:message name="iSendResultsResponse">
+    <wsdl:part name="iSendResultsResponse" element="ack:Acknowledgement"/>
+  </wsdl:message>
+  <wsdl:portType name="iMapGatewayType">
+    <wsdl:operation name="sendCase">
+      <wsdl:input message="tns:iSendCase"/>
+      <wsdl:output message="tns:iSendCaseResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendResults">
+      <wsdl:input message="tns:iSendResults"/>
+      <wsdl:output message="tns:iSendResultsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MapGatewayBinding" type="tns:iMapGatewayType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sendCase">
+      <soap:operation soapAction="sendCase"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendResults">
+      <soap:operation soapAction="sendResults"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MapGatewayService">
+    <wsdl:port name="MapGatewayPort" binding="tns:MapGatewayBinding">
+      <soap:address location="http://www.justice.gov.uk/magistrates"/>
+      <wswa:UsingAddressing xmlns:wswa="http://www.w3.org/2005/08/addressing/wsdl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\CSCI.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/MAP/CSCI" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/CSCI" xmlns:msh="http://www.justice.gov.uk/magistrates/generic/CSCI_Header" xmlns:msb="http://www.justice.gov.uk/magistrates/MAP/CSCI_Body" xmlns:mss="http://www.justice.gov.uk/magistrates/generic/CSCI_Status">
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/generic/CSCI_Header" schemaLocation="../generic/CSCI_Header.xsd"/>
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/MAP/CSCI_Body" schemaLocation="CSCI_Body.xsd"/>
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/generic/CSCI_Status" schemaLocation="../generic/CSCI_Status.xsd"/>
+  <xs:element name="CSCI_Message_Type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="msh:MessageHeader"/>
+        <xs:element ref="msb:MessageBody"/>
+        <xs:element ref="mss:MessageStatus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\generic\CSCI_Header.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/generic/CSCI_Header" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/generic/CSCI_Header">
+  <xs:element name="MessageHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MessageID">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UUID" type="xs:string"/>
+              <xs:element name="RelatesTo" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TimeStamp" type="xs:dateTime"/>
+        <xs:element name="MessageType" type="xs:string"/>
+        <xs:element name="From" type="xs:string"/>
+        <xs:element name="To" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\CSCI_Body.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/MAP/CSCI_Body" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/CSCI_Body" xmlns:msb="http://www.justice.gov.uk/magistrates/MAP/GatewayMessageSchema">
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/MAP/GatewayMessageSchema" schemaLocation="GatewayMessageSchema.xsd"/>
+  <xs:element name="MessageBody" type="tns:MessageBodyType"/>
+  <xs:complexType name="MessageBodyType">
+    <xs:sequence>
+      <xs:element ref="msb:GatewayOperationType"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\GatewayMessageSchema.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/MAP/GatewayMessageSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/GatewayMessageSchema" xmlns:map-cse="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:map-res="http://www.justice.gov.uk/magistrates/MAP/Result" xmlns:ack="http://www.justice.gov.uk/magistrates/ack">
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/MAP/Case" schemaLocation="./SendCase/SendCase.xsd"/>
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/MAP/Result" schemaLocation="./SendResults/SendResults.xsd"/>
+  <xs:import namespace="http://www.justice.gov.uk/magistrates/ack" schemaLocation="../generic/Acknowledgement/Acknowledgement.xsd"/>
+  <xs:element name="GatewayOperationType">
+    <xs:complexType>
+      <xs:choice>
+        <!--CASE-->
+        <xs:element ref="map-cse:Cases"/>
+        <!--RESULT-->
+        <xs:element ref="map-res:Result"/>
+        <!--ACKNOWLEDGEMENT-->
+        <xs:element ref="ack:Acknowledgement"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\SendCase\SendCase.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.justice.gov.uk/magistrates/MAP/Case" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:psn="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity">
+  <xsd:import namespace="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity" schemaLocation="../../map/PersonEntity.xsd"/>
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">CGI IT UK Limited. A CGI Group Inc. Company 
+			Registered Office: 250 Brook Drive, 
+			Green Park, Re
+			ading RG2 6UA, 
+			United Kingdom. 
+			
+			Registered in England and Wales - Number 947968
+			
+			0.1 - DD - 05/03/2015 - Initial draft
+			0.2 - DD - 23/03/2015 - valided XMLForest
+			0.3 - DD - 28/03/2015 - adjusted to reflect data occurrence requirements.
+			0.4 - DD - 31/03/2015 - unqualified XML
+			0.5 - DD - 08/04/2015 - Set optionality
+			0.6 - DD - 21/04/2015 - MAP Beta changes
+			0.7 - DD - 30/04/2015 - valided XMLForest
+			0.8 - DD - 02/06/2015 - updated OffenceShortTitle to be 120</xsd:documentation>
+  </xsd:annotation>
+  <!--======================-->
+  <!--CASES-->
+  <!--======================-->
+  <xsd:element name="Cases">
+    <xsd:annotation>
+      <xsd:documentation>Cases - List of cases</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Case" type="tns:Case" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--======================-->
+  <!--CASE DEFINITIONS-->
+  <!--======================-->
+  <xsd:complexType name="Case">
+    <xsd:annotation>
+      <xsd:documentation>Schema defining the elements in a Case</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="LibraDefendantType" type="tns:LibraDefendantType"/>
+      <xsd:element name="LibraHearingType" type="tns:LibraHearingType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="LibraCaseType" type="tns:LibraCaseType" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="LibraOffenceType" type="tns:LibraOffenceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--======================-->
+  <!--DEFENDANT-->
+  <!--======================-->
+  <xsd:complexType name="LibraDefendantType">
+    <xsd:annotation>
+      <xsd:documentation>Defendant Type (Person or Organisation)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonEntityType" type="psn:PersonEntityType" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="DocumentLanguage" type="xsd:string" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Default to "EN" - English unless in a Welsh CJA</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="HearingLanguage" type="xsd:string" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Default to "EN" - English unless in a Welsh CJA</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--======================-->
+  <!--CASE INFORMATION-->
+  <!--======================-->
+  <xsd:complexType name="LibraCaseType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Case Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CaseNumber" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CaseURN" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OUCode" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="7"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CaseInitiationType" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="80"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--===========================-->
+  <!--CASE HEARING INFORMATION-->
+  <!--===========================-->
+  <xsd:complexType name="LibraHearingType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Case Hearing Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="SessionTimes" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--=========================-->
+  <!--OFFENCE INFORMATION-->
+  <!--=========================-->
+  <xsd:complexType name="LibraOffenceType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Offence Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="OffenceCode" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OffenceShortTitle" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="120"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OffenceWording" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4000"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OffenceSequenceNumber" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\PersonEntity.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity">
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">CGI Libra PersonEntity schema
+			
+			0.1 - DD - 24/02/2015 - Initial draft.
+			0.2 - DD - 19/05/2015 - Confirmed MAP Beta.
+			0.3 - DD - 02/06/2015 - VehicleRegistration is unbounded.</xsd:documentation>
+  </xsd:annotation>
+  <!--==============================-->
+  <!--PERSON ENTITY INFORMATION-->
+  <!--==============================-->
+  <xsd:complexType name="PersonEntityType">
+    <xsd:annotation>
+      <xsd:documentation>Person Entity Type - Elements that make up a persons details</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="OrganisationName" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="80"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OrganisationPrimaryKey" type="xsd:string" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>This is the same as the Libra OrganisationName</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="PersonPrimaryKey" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="Title" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Forename1" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Forename2" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Forename3" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Surname" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DOB" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="Age" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="Gender" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="Address1" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Address2" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Address3" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Address4" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Address5" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Postcode" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="NINO" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DriverNumber" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="16"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="VehicleRegistration" minOccurs="0" maxOccurs="unbounded">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="11"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TelephoneNumberBusiness" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TelephoneNumberHome" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TelephoneNumberMobile" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="EmailAddress1" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="253"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="EmailAddress2" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="253"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\map\SendResults\SendResults.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.justice.gov.uk/magistrates/MAP/Result" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://www.justice.gov.uk/magistrates/MAP/Result" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/Result">
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">CGI IT UK Limited. A CGI Group Inc. Company 
+			Registered Office: 250 Brook Drive, 
+			Green Park, Re
+			ading RG2 6UA, 
+			United Kingdom. 
+			
+			Registered in England and Wales - Number 947968
+			
+			0.1 - DD - 05/03/2015 - Initial draft
+			0.2 - DD - 23/03/2015 - valided XMLForest
+			0.3 - DD - 23/03/2015 - updated following review comment and update from DW
+			0.4 - DD - 23/03/2015 - valided XMLForest
+			0.5 - DD - 31/03/2015 - unqualified XML
+			0.6 - DD - 08/04/2015 - Set optionality
+			0.7 - DD - 21/04/2015 - MAP Beta changes
+			0.8 - DD - 21/05/2015 - TRAC Defects #486,#487,#488</xsd:documentation>
+  </xsd:annotation>
+  <!--======================-->
+  <!--RESULT DEFINITIONS-->
+  <!--======================-->
+  <xsd:element name="Result">
+    <xsd:annotation>
+      <xsd:documentation>Schema defining the elements in a Result</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ResultType" type="tns:ResultType" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--======================-->
+  <!--RESULT INFORMATION-->
+  <!--======================-->
+  <xsd:complexType name="ResultType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Result Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="LibraCaseType" type="tns:LibraCaseType" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="LibraResultOffence" type="tns:LibraResultOffence" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element name="LibraPaymentTerm" type="tns:LibraPaymentTerm" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--=========================-->
+  <!--LIBRA RESULT OFFENCE-->
+  <!--=========================-->
+  <xsd:complexType name="LibraResultOffence">
+    <xsd:annotation>
+      <xsd:documentation>Libra Result Offence Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="LibraResultData" type="tns:LibraResultData" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element name="LibraOffenceType" type="tns:LibraOffenceType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--=========================-->
+  <!--LIBRA RESULT DATA-->
+  <!--=========================-->
+  <xsd:complexType name="LibraResultData">
+    <xsd:annotation>
+      <xsd:documentation>Libra Result Data</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ResultCode" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ResultShortTitle" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="RegisterWording" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--=========================-->
+  <!--PAYMENT TERM-->
+  <!--=========================-->
+  <xsd:complexType name="LibraPaymentTerm">
+    <xsd:annotation>
+      <xsd:documentation>Libra Offence Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="InstalmentAmount" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="LumpSumAmount" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="PayByDate" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="PaymentType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--=========================-->
+  <!--OFFENCE INFORMATION-->
+  <!--=========================-->
+  <xsd:complexType name="LibraOffenceType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Offence Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="OffenceCode" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OffenceSequenceNumber" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--======================-->
+  <!--CASE INFORMATION-->
+  <!--======================-->
+  <xsd:complexType name="LibraCaseType">
+    <xsd:annotation>
+      <xsd:documentation>Libra Case Type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CaseNumber" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CaseURN" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="35"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OUCode" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="7"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\generic\Acknowledgement\Acknowledgement.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/ack" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://www.justice.gov.uk/magistrates/ack" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="en">CGI Libra Acknowledgement schema
+			
+			v0.1 - Daniel Deane - Initial Draft for L-R-4093-01 Libra to Court Store
+			v0.2 - Daniel Deane - qualified namespace
+			v0.3 - Daniel Deane - reuse for DMU with new namespace</xs:documentation>
+  </xs:annotation>
+  <!--=======================================================================================================-->
+  <xs:element name="Acknowledgement">
+    <xs:annotation>
+      <xs:documentation>Acknowledgement response</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Ack" type="AckType">
+          <xs:annotation>
+            <xs:documentation>Represents a link to the Acknowledgement</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="AckType">
+    <xs:annotation>
+      <xs:documentation>Represents a message acknowledgement response</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="MessageStatus" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Acknowledgement Status - The status will represent the detail of the responce depending on the request</xs:documentation>
+          <xs:documentation>Acknowledgement Status "DELIVERED" - confirmation of receipt when sending the request</xs:documentation>
+          <xs:documentation>Acknowledgement Status "VERIFIED" - confirmation of an action required as a response to the request</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TimeStamp" type="xs:date" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Acknowledgement time stamp</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\generic\CSCI_Status.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.justice.gov.uk/magistrates/generic/CSCI_Status" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/generic/CSCI_Status">
+  <xs:element name="MessageStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="status" type="xs:string"/>
+        <xs:element name="code" type="xs:string"/>
+        <xs:element name="reason" type="xs:string"/>
+        <xs:element name="detail" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\development\LibraMaat\MAP\CommonCode\trunk\app\wsdl-xsd\src\main\resources\xsd\generic\SchemaHeader.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.justice.gov.uk/magistrates/generic/SchemaHeader" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns="http://www.justice.gov.uk/magistrates/generic/SchemaHeader" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/generic/SchemaHeader">
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">CGI Libra SchemaHeader schema
+			
+			0.1 - DD - 07/07/2015 - Initial draft DES-23</xsd:documentation>
+  </xsd:annotation>
+  <!--================================-->
+  <!--SCHEMA HEADER INFORMATION-->
+  <!--================================-->
+  <xsd:complexType name="SchemaHeaderType">
+    <xsd:annotation>
+      <xsd:documentation>Schema Header Type - Standard Schema Header Elements imported across schemas</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="UserName" minOccurs="1" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="DateOfHearing" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="TimeOfHearing" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="CourtHouseName" minOccurs="0" maxOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://www.justice.gov.uk/magistrates</con:endpoint><con:endpoint>http://localhost:8080/map_mgw/service/mapmirrorgatewayapi</con:endpoint><con:endpoint>http://Win7WS22:8088/mockMapGatewayBinding</con:endpoint></con:endpoints><con:operation isOneWay="false" action="sendCase" name="sendCase" bindingOperationName="sendCase" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="SendCase-Test2-EmptyCase" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/map_mgw/service/mapmirrorgatewayapi</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:case="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedKey Id="EK-DF5E2A2A1DCCABC6A114438030461394" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference><ds:X509Data><ds:X509IssuerSerial><ds:X509IssuerName>CN=Justice,OU=MAP,O=DIGITAL,L=MANCHESTER,ST=LANCASHIRE,C=UK</ds:X509IssuerName><ds:X509SerialNumber>683619788</ds:X509SerialNumber></ds:X509IssuerSerial></ds:X509Data></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>Mw4z2cjx+rx1Pmq7EO1xNwbeuQl5iIldJ6TbbldpRhTtQw2LEp4hBeMg3kHN5BHM7wea0KwuNQ2dTWWCUYHlHeFF5Lc7RMPnqj5IkASEZfVLlZ8O3z0jEY8rcwoXq9FfUmGQddJZIt1pDNI61xkVcS0v1sIRpmwDYulU0GBrPCMjzM4rZgojGrkisaxWgD6dEuCC2IFC0SHYl6mMp0ECXDbZHPGg4ps/2uTelYtphQgSoIDKE5n3bjQiYWnQvknEuVf7RpqsYZnACkFRhmpNheVhPVlxwd8eS7MYyb/9O4e9Sx7QfBN4fz6DMt/56L2tl4E+HNk3zBv16atZCIrxlg==</xenc:CipherValue></xenc:CipherData><xenc:ReferenceList><xenc:DataReference URI="#ED-3"/></xenc:ReferenceList></xenc:EncryptedKey><wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="X509-DF5E2A2A1DCCABC6A114438030455321">MIIDZTCCAk2gAwIBAgIEfuYWLzANBgkqhkiG9w0BAQsFADBjMQswCQYDVQQGEwJVSzEPMA0GA1UECBMGU3VycmV5MRQwEgYDVQQHEwtMZWF0aGVyaGVhZDEMMAoGA1UEChMDQ0dJMQ0wCwYDVQQLEwRPU0RUMRAwDgYDVQQDEwdKdXN0aWNlMB4XDTE1MTAwMTE2MzE0MloXDTI1MDkyODE2MzE0MlowYzELMAkGA1UEBhMCVUsxDzANBgNVBAgTBlN1cnJleTEUMBIGA1UEBxMLTGVhdGhlcmhlYWQxDDAKBgNVBAoTA0NHSTENMAsGA1UECxMET1NEVDEQMA4GA1UEAxMHSnVzdGljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI+Iqmmr5A4KTrHqZhL17/g2MZOxkNwIXjFNX+qBq5VpjvVN5J5au3fN8j/n8SMA+p9umNvJtjALVVz9QojJtbnswOvGDYPStXEs1RGyu/lQYiTZ7T0ZAolsuuHq4julZ4/4kWSMuTNaasZegBwG0fG9TyLpKcx8OVMB7jDMponkugoPLxWMcJLDZjh23PNiy5X0Qh8u/itXIcvj877CwKVWCDXv0aFh6bIKADUBu52h+iDWz8tfp90d4c4IDwVjTEvmEGGjn/VcK9Ji20xnJgOmr80KzSapE9/uMKGLm5mwyKqEcRx9L+6fHWkaqNSMLBJMFgoFuUS311uETdmGGYECAwEAAaMhMB8wHQYDVR0OBBYEFOa1FJ7uqkiDtTvvDaJv4vlfOoSqMA0GCSqGSIb3DQEBCwUAA4IBAQCFJXUwVAtAhxkSd0twa7GZLhRUvIKMGqN/5mWDCYJ/iB0l0Grf7cql3RuBj+uRgDK6+7jmDid5qaWnqZ0aVO9KObkwnAIZl7OJBX5ty2ZKzGxpGYS00bTRXUtRXdvp4O9T2Vovsp16rmLAj0xwVqz7lYhx/cSLfrwIkrjaMwvca+fKWmcT/No9Vqmpn2NtF8krPveS/f/0ZFTtS2uAH0q9VXa5c9NgFg2jRWFsCgDMhlxH3zCkj55E2MmjOSt1wWQT/EbTYaHecIpyyBc7LeR3Mhikd+7t5/8gd8f7fhl2YRq/MBsm7wfdJS2XmEKymOKE+BaU9tLPMEoainhYvUGW</wsse:BinarySecurityToken><ds:Signature Id="SIG-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="wsa case soap" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#id-1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="case" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>/7GmGn3G0GbCqA+bRTndqkk2z/A=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>acNINeYYqFAkUA7FImjQW1ERNcXxwd+PAXkPTMrLhoEVwH9TciyFFAmq1zk0tkGrIHDJdDxjfHFm
+UDW/h9MIQmg6chrAc8niJnZz35jaAFFHDxKkYLu+bCymUo2wtPW9qYiVH7D09wFZ2vXZ7sv6hGjS
+pcs6OYpsc7WIF5/DFUNjipUrOo3kLtifN9pXfv9Vn/B5GlWqbTgaS/yz927w7F05gd1JLtAPI1QY
+8h27h8TxWVbbJn0dKvOaPjI4cL/ObyHAQ3UtnRDQD7sArZlvYwoEzBXjj2Eo4UTHMsNtmfL+WDol
+55Nr8KjPiuANcOkd9hmYFy1ivXG7fctvJgZNOA==</ds:SignatureValue><ds:KeyInfo Id="KI-DF5E2A2A1DCCABC6A114438030456032"><wsse:SecurityTokenReference wsu:Id="STR-DF5E2A2A1DCCABC6A114438030456103"><wsse:Reference URI="#X509-DF5E2A2A1DCCABC6A114438030455321" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/></wsse:SecurityTokenReference></ds:KeyInfo></ds:Signature></wsse:Security>
+      
+      
+      
+      
+      
+   <wsa:Action>sendCase</wsa:Action><wsa:From><wsa:Address>LIBRA</wsa:Address></wsa:From><wsa:MessageID>1000</wsa:MessageID><wsa:RelatesTo>SendCase-Test2.xml</wsa:RelatesTo><wsa:To>MAP</wsa:To></soap:Header>
+   <soap:Body wsu:Id="id-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedData Id="ED-3" Type="http://www.w3.org/2001/04/xmlenc#Content" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference wsse11:TokenType="http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#EncryptedKey" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsse11="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd"><wsse:Reference URI="#EK-DF5E2A2A1DCCABC6A114438030461394"/></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>JMvTj+IToeQXhztHr0ek20UXOc+msYeMS7t0ksWgVwbEF9GYOkc96a9q5I3kV7niIxsKRvHq3Yvwfpe2jaf+cu/XokbhZmqY+4RAHyFFVmgwvXewEcyk5zj5xH91EsaCj91z1hJPlotSsEiCcLoxAMBafR+gU5w3Z2RnYlDrPMuBdfGUl7NNisEtQ6uOELeZ8JLTkMMAFbwhZw78ZzU6UkvqOjze+ZC9557vds7oFaYC7t4U4wLfM/QMIY4JzdkwWFfpoJ+loqqf8JtBtupY+rF5LFiJWHGG6SpMMHMKI7q5f1V8jxxApB2B68n0b68AdV0Oihtz2yr7+8z6JGZrPULPM3iGAHhU8Jm/fNk03CI=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="sendCase" to="MAP" messageID="1000" from="LIBRA" relatesTo="SendCase-Test2.xml"/><con:wsrmConfig version="1.2"/></con:call><con:call name="SendCase_test_CH"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/map_mgw/service/mapmirrorgatewayapi</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:case="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedKey Id="EK-31BB5CB467EBF0488714460308582624" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference><ds:X509Data><ds:X509IssuerSerial><ds:X509IssuerName>CN=Justice,OU=MAP,O=DIGITAL,L=MANCHESTER,ST=LANCASHIRE,C=UK</ds:X509IssuerName><ds:X509SerialNumber>683619788</ds:X509SerialNumber></ds:X509IssuerSerial></ds:X509Data></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>hCEVKeGlyuyN4os1EwM7MHvZkcaFdWjJLQPMbv7zCrKWWKfqVcKmlx+aZphCSef+FZPm81pjeNyWMi9YYJ6Ka53G+LB1o1itz1kYVedOmQoEzp5hhqJXci+bKaVlbEpEnWpm0K40fHy9XFF5l670BoLdGJHiSXj/KPcX+iAGEglpK3H4azebGRneHENxsiPKwq2/3UXJ2p2/CX21XtxNJ1VsUawu0NxX7De5vrH8eFQbB/+lyTCevl4Dj3JKOFjTo0ph8NmatHeo+92Ild1vbJpSdsx4CI6A+Khk8IvFkOP0cOIlyuyrV/Zw09S+hOZ0av0gSSaXezGJnHY4l3oNjw==</xenc:CipherValue></xenc:CipherData><xenc:ReferenceList><xenc:DataReference URI="#ED-3"/></xenc:ReferenceList></xenc:EncryptedKey><wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="X509-31BB5CB467EBF0488714460308576381">MIIDZTCCAk2gAwIBAgIEfuYWLzANBgkqhkiG9w0BAQsFADBjMQswCQYDVQQGEwJVSzEPMA0GA1UECBMGU3VycmV5MRQwEgYDVQQHEwtMZWF0aGVyaGVhZDEMMAoGA1UEChMDQ0dJMQ0wCwYDVQQLEwRPU0RUMRAwDgYDVQQDEwdKdXN0aWNlMB4XDTE1MTAwMTE2MzE0MloXDTI1MDkyODE2MzE0MlowYzELMAkGA1UEBhMCVUsxDzANBgNVBAgTBlN1cnJleTEUMBIGA1UEBxMLTGVhdGhlcmhlYWQxDDAKBgNVBAoTA0NHSTENMAsGA1UECxMET1NEVDEQMA4GA1UEAxMHSnVzdGljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI+Iqmmr5A4KTrHqZhL17/g2MZOxkNwIXjFNX+qBq5VpjvVN5J5au3fN8j/n8SMA+p9umNvJtjALVVz9QojJtbnswOvGDYPStXEs1RGyu/lQYiTZ7T0ZAolsuuHq4julZ4/4kWSMuTNaasZegBwG0fG9TyLpKcx8OVMB7jDMponkugoPLxWMcJLDZjh23PNiy5X0Qh8u/itXIcvj877CwKVWCDXv0aFh6bIKADUBu52h+iDWz8tfp90d4c4IDwVjTEvmEGGjn/VcK9Ji20xnJgOmr80KzSapE9/uMKGLm5mwyKqEcRx9L+6fHWkaqNSMLBJMFgoFuUS311uETdmGGYECAwEAAaMhMB8wHQYDVR0OBBYEFOa1FJ7uqkiDtTvvDaJv4vlfOoSqMA0GCSqGSIb3DQEBCwUAA4IBAQCFJXUwVAtAhxkSd0twa7GZLhRUvIKMGqN/5mWDCYJ/iB0l0Grf7cql3RuBj+uRgDK6+7jmDid5qaWnqZ0aVO9KObkwnAIZl7OJBX5ty2ZKzGxpGYS00bTRXUtRXdvp4O9T2Vovsp16rmLAj0xwVqz7lYhx/cSLfrwIkrjaMwvca+fKWmcT/No9Vqmpn2NtF8krPveS/f/0ZFTtS2uAH0q9VXa5c9NgFg2jRWFsCgDMhlxH3zCkj55E2MmjOSt1wWQT/EbTYaHecIpyyBc7LeR3Mhikd+7t5/8gd8f7fhl2YRq/MBsm7wfdJS2XmEKymOKE+BaU9tLPMEoainhYvUGW</wsse:BinarySecurityToken><ds:Signature Id="SIG-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="wsa case soap" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#id-1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="case" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>GIefepI+nrX6pMlqQN5egIe2kGY=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Qw+FtMtAO4k/9wsG0VPQEc1UGjWq0NyS3S0l7y2z3liewxBVh475gOkFywXban30YNoYGogFBmrI
+d4ifCHISWgsyAmJY5rHorjx4Zf5QV+cWOzSFYmCothP/TmxGuFhPfvKHe8lRFJaLNjaP0YZhJOGq
+VXvk3YZuINxs8kLHLNFM385Wuujl4WFokEqLDIdiFzy2Pa9zWqtdhGFdXvMAnd+iwdyr7e4faK7G
+odc7Ixe3Rt85wli6KpnA1JRWbYPPYOxVIlsZjeIDR9njTuLS8mkIvZPXVLq9r6S6wml0an0pNCk1
+m+3zGBtTm5Fs56Fp/7m9iDpliitijcObj2OGkw==</ds:SignatureValue><ds:KeyInfo Id="KI-31BB5CB467EBF0488714460308577012"><wsse:SecurityTokenReference wsu:Id="STR-31BB5CB467EBF0488714460308577013"><wsse:Reference URI="#X509-31BB5CB467EBF0488714460308576381" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/></wsse:SecurityTokenReference></ds:KeyInfo></ds:Signature></wsse:Security>
+      <wsa:Action>sendCase</wsa:Action>
+      <wsa:From>
+         <wsa:Address>LIBRA</wsa:Address>
+      </wsa:From>
+      <wsa:MessageID>222</wsa:MessageID>
+      <wsa:RelatesTo>SendCase_test_CH.xml</wsa:RelatesTo>      
+      <wsa:To>MAP</wsa:To>
+   </soap:Header>
+   <soap:Body wsu:Id="id-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedData Id="ED-3" Type="http://www.w3.org/2001/04/xmlenc#Content" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference wsse11:TokenType="http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#EncryptedKey" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsse11="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd"><wsse:Reference URI="#EK-31BB5CB467EBF0488714460308582624"/></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>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</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.justice.gov.uk/magistrates/map/MAPSoapGateway/iMapGatewayType/sendCaseRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="sendResults" name="sendResults" bindingOperationName="sendResults" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="SendResults-Test2-EmptyResult" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/map_mgw/service/mapmirrorgatewayapi</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:res="http://www.justice.gov.uk/magistrates/MAP/Result" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedKey Id="EK-DF5E2A2A1DCCABC6A114438034473718" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference><ds:X509Data><ds:X509IssuerSerial><ds:X509IssuerName>CN=Justice,OU=MAP,O=DIGITAL,L=MANCHESTER,ST=LANCASHIRE,C=UK</ds:X509IssuerName><ds:X509SerialNumber>683619788</ds:X509SerialNumber></ds:X509IssuerSerial></ds:X509Data></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>V4cG95vjk98ySZdkIpSnCatkBlNSoUQ7oqpFAt5acYExVIXrTnRkzoUhCQRg9CXX22AZMiLmKHukXVrnfboSWa617zXhhwSabnwoMM4D2Xecwb0ttXE7KCZxQvLClPk+M/XH8g4uJyT6aeePqeQas5KN+Rntm8e4mkdtp9m2AFiCsO7X9zzX6XPUcdk/j/V4tXUqEU9+PVCY0YVDit9yEE1GPIkVmAootrGeXHCDLlj211JGG1G7Cbh2AIFuZMxRxyD60ptESNgfyH9cF0gTm3PFqjjkljfpgNjCThGx1raxQ5nv4fca9Q+MCrEWxoEI+7HIBBWfMHWT3eN49wc8FQ==</xenc:CipherValue></xenc:CipherData><xenc:ReferenceList><xenc:DataReference URI="#ED-6"/></xenc:ReferenceList></xenc:EncryptedKey><wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="X509-DF5E2A2A1DCCABC6A114438034472395">MIIDZTCCAk2gAwIBAgIEfuYWLzANBgkqhkiG9w0BAQsFADBjMQswCQYDVQQGEwJVSzEPMA0GA1UECBMGU3VycmV5MRQwEgYDVQQHEwtMZWF0aGVyaGVhZDEMMAoGA1UEChMDQ0dJMQ0wCwYDVQQLEwRPU0RUMRAwDgYDVQQDEwdKdXN0aWNlMB4XDTE1MTAwMTE2MzE0MloXDTI1MDkyODE2MzE0MlowYzELMAkGA1UEBhMCVUsxDzANBgNVBAgTBlN1cnJleTEUMBIGA1UEBxMLTGVhdGhlcmhlYWQxDDAKBgNVBAoTA0NHSTENMAsGA1UECxMET1NEVDEQMA4GA1UEAxMHSnVzdGljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI+Iqmmr5A4KTrHqZhL17/g2MZOxkNwIXjFNX+qBq5VpjvVN5J5au3fN8j/n8SMA+p9umNvJtjALVVz9QojJtbnswOvGDYPStXEs1RGyu/lQYiTZ7T0ZAolsuuHq4julZ4/4kWSMuTNaasZegBwG0fG9TyLpKcx8OVMB7jDMponkugoPLxWMcJLDZjh23PNiy5X0Qh8u/itXIcvj877CwKVWCDXv0aFh6bIKADUBu52h+iDWz8tfp90d4c4IDwVjTEvmEGGjn/VcK9Ji20xnJgOmr80KzSapE9/uMKGLm5mwyKqEcRx9L+6fHWkaqNSMLBJMFgoFuUS311uETdmGGYECAwEAAaMhMB8wHQYDVR0OBBYEFOa1FJ7uqkiDtTvvDaJv4vlfOoSqMA0GCSqGSIb3DQEBCwUAA4IBAQCFJXUwVAtAhxkSd0twa7GZLhRUvIKMGqN/5mWDCYJ/iB0l0Grf7cql3RuBj+uRgDK6+7jmDid5qaWnqZ0aVO9KObkwnAIZl7OJBX5ty2ZKzGxpGYS00bTRXUtRXdvp4O9T2Vovsp16rmLAj0xwVqz7lYhx/cSLfrwIkrjaMwvca+fKWmcT/No9Vqmpn2NtF8krPveS/f/0ZFTtS2uAH0q9VXa5c9NgFg2jRWFsCgDMhlxH3zCkj55E2MmjOSt1wWQT/EbTYaHecIpyyBc7LeR3Mhikd+7t5/8gd8f7fhl2YRq/MBsm7wfdJS2XmEKymOKE+BaU9tLPMEoainhYvUGW</wsse:BinarySecurityToken><ds:Signature Id="SIG-5" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="wsa res soap" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#id-4"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="res" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>UfEueL6OlTn24YgouDZfBnVOqm0=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Ib/2ewsMr9UWz3LBYNyw7QnEzES+DTcgZOkvsKDEmsiCXxxqljpwGeJZdQ7iOqqiOTF7qI1Af4a2
+bpX/HJ1yRamyJIvuq78BBvyyMV3fYwjZUhoCDax7aMxyVuuD5rCRVkFqVXoSB91hgXOV8V1SBWD4
+yg1GqrtgyCqub2rEMFqvAhRtCUJezNwsvOmLnSECGdmpbCGAmBDSGaolmncRlKw8CmjDrQgSbR2g
+B9QTTW0bRqLH+lPbuuCdgGPH9194iury+tty4CcTo1MsUjL9TsBQmOMksEKdTZhGHXTgsTmr/Y8l
+X2uCkzC2wfmex5Nj7xpqTQew42DdDPwiYPT7sg==</ds:SignatureValue><ds:KeyInfo Id="KI-DF5E2A2A1DCCABC6A114438034472396"><wsse:SecurityTokenReference wsu:Id="STR-DF5E2A2A1DCCABC6A114438034472397"><wsse:Reference URI="#X509-DF5E2A2A1DCCABC6A114438034472395" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/></wsse:SecurityTokenReference></ds:KeyInfo></ds:Signature></wsse:Security>
+      
+      
+      
+      
+      
+   <wsa:Action>sendResults</wsa:Action><wsa:From><wsa:Address>LIBRA</wsa:Address></wsa:From><wsa:MessageID>7000</wsa:MessageID><wsa:RelatesTo>SendResults-Test2.xml</wsa:RelatesTo><wsa:To>MAP</wsa:To></soap:Header>
+   <soap:Body wsu:Id="id-4" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><xenc:EncryptedData Id="ED-6" Type="http://www.w3.org/2001/04/xmlenc#Content" xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><wsse:SecurityTokenReference wsse11:TokenType="http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#EncryptedKey" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsse11="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd"><wsse:Reference URI="#EK-DF5E2A2A1DCCABC6A114438034473718"/></wsse:SecurityTokenReference></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>+6SmEtLis03RMGoxtX5qi9FFKwdCMxdaZteMcUeXaDF1t79D9/nWgtWvY79G3VHJOg2Xex5NGa+zYqyXqH21UwQ/z+tDpgcFXVEp54p5K3oKhQ8SO+boaHsB+MVSVCvR6mlykUfmPs+yR42YnlvHVebQ627jX6oTUqevS66J5gd2mxC3LNXIhs+OdH+0ioFILorU84AMlzsqMzkQiuJlZG7ZOM9b/GL5D/yLpxY8Ht/K8td5PVDO8urZ73x7Px0ZoXafG4kbJhfNvoAr9aBcw8xIQhx4eTLqs3awUrmazIkZ18sXZJBeADyJRHC5FpbrXufAZWnBVLV6EojGizOO27JDyBMzSQEzR+FlFemqPAU=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="sendResults" to="MAP" from="LIBRA" messageID="7000"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

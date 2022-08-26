@@ -1,0 +1,1 @@
+-- Synonyms are not required for PostgreSQL

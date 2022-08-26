@@ -1,0 +1,18 @@
+#!groovy
+
+@Library("Infrastructure") _
+
+def type = "python"
+def product = "makeaplea"
+def component = "mirror-gateway"
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+withPipeline(type, product, component) {}

@@ -1,0 +1,32 @@
+# Batch script to add the configuration to the WildFly server
+#
+# Usage: jboss-cli.sh --file=map_config.cli
+
+# Connect to the running WildFly server
+connect 127.0.0.1
+
+# Start batching commands
+batch
+
+# Configure system property
+/system-property=mirrorgatewayProperties:add(value=${jboss.server.config.dir}/mirrorgateway.properties)
+
+# Configure the JMS queues
+jms-queue add --queue-address=GatewayInboundQueue --entries=java:jboss/GatewayInboundQueue,java:jboss/exported/jboss/GatewayInboundQueue --durable=true
+jms-queue add --queue-address=GatewayOutboundQueue --entries=java:jboss/GatewayOutboundQueue,java:jboss/exported/jboss/GatewayOutboundQueue --durable=true
+
+# NOTE: wildflydb is hard coded. But obviously the IP address/hostname of the RDS db will vary. I'm proposing that we use docker run --add-host option to configure the host.
+
+# Configure the JMS Datasource
+#data-source add --name=MirrorGatewayDS --jndi-name=java:/jdbc/MirrorGatewayDS --driver-name=postgres-driver/postgresql-9.4-1203.jdbc4.jar --driver-class=org.postgresql.Driver --connection-url=jdbc:postgresql://{env.POSTGRES_HOST}:5432/makeaplea --min-pool-size=5 --max-pool-size=10 --user-name={env.POSTGRES_USER} --password={env.POSTGRES_PASS}
+
+data-source add --name=MirrorGatewayDS --jndi-name=java:/jdbc/MirrorGatewayDS --driver-name=postgres-driver/postgresql-9.4-1203.jdbc4.jar --driver-class=org.postgresql.Driver --connection-url=jdbc:postgresql://db:5432/makeaplea --min-pool-size=5 --max-pool-size=10 --user-name=makeaplea --password=password
+# Configure the server log
+/subsystem=logging/periodic-rotating-file-handler=FILE:remove
+/subsystem=logging/size-rotating-file-handler=FILE:add(level="ALL",file={"path"=>"server.log","relative-to"=>"jboss.server.log.dir"},rotate-size="10m",max-backup-index="50",append=true,autoflush=true)
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+:reload 

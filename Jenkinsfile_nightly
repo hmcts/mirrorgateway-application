@@ -1,0 +1,14 @@
+#!groovy
+
+properties([
+  // H allows predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
+  pipelineTriggers([cron('H 05 * * *')])
+])
+
+@Library("Infrastructure")
+
+def type = "python"
+def product = "makeaplea"
+def component = "mirror-gateway"
+
+withNightlyPipeline(type, product, component) {}

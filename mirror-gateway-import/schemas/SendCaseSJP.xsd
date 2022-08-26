@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.justice.gov.uk/magistrates/MAP/Case" xmlns:psn="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity" targetNamespace="http://www.justice.gov.uk/magistrates/MAP/Case" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.justice.gov.uk/magistrates/generic/DXMAPPersonEntity" schemaLocation="PersonEntitySJP.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+
+			CGI IT UK Limited. A CGI Group Inc. Company 
+			Registered Office: 250 Brook Drive, 
+			Green Park, Re
+			ading RG2 6UA, 
+			United Kingdom. 
+			
+			Registered in England and Wales - Number 947968
+			
+			0.1 - DD - 05/03/2015 - Initial draft
+			0.2 - DD - 23/03/2015 - valided XMLForest
+			0.3 - DD - 28/03/2015 - adjusted to reflect data occurrence requirements.
+			0.4 - DD - 31/03/2015 - unqualified XML
+			0.5 - DD - 08/04/2015 - Set optionality
+			0.6 - DD - 21/04/2015 - MAP Beta changes
+			0.7 - DD - 30/04/2015 - valided XMLForest
+			0.8 - DD - 02/06/2015 - updated OffenceShortTitle to be 120
+			0.9 - DD - 30/09/2015 - SJP Data
+			
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--======================-->
+	<!-- CASES                           -->
+	<!--======================-->
+	<xsd:element name="Cases">
+		<xsd:annotation>
+			<xsd:documentation>Cases - List of cases</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Case" type="tns:Case" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--======================-->
+	<!-- CASE DEFINITIONS             -->
+	<!--======================-->
+	<xsd:complexType name="Case">
+		<xsd:annotation>
+			<xsd:documentation>Schema defining the elements in a Case</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LibraDefendantType" type="tns:LibraDefendantType"/>
+			<xsd:element name="LibraHearingType" type="tns:LibraHearingType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LibraCaseType" type="tns:LibraCaseType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="LibraOffenceType" type="tns:LibraOffenceType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--======================-->
+	<!-- DEFENDANT                        -->
+	<!--======================-->
+	<xsd:complexType name="LibraDefendantType">
+		<xsd:annotation>
+			<xsd:documentation>Defendant Type (Person or Organisation)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PersonEntityType" type="psn:PersonEntityType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DocumentLanguage" type="xsd:string" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Default to "EN" - English unless in a Welsh CJA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HearingLanguage" type="xsd:string" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Default to "EN" - English unless in a Welsh CJA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--======================-->
+	<!-- CASE INFORMATION           -->
+	<!--======================-->
+	<xsd:complexType name="LibraCaseType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Case Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CaseNumber" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="12"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CaseURN" minOccurs="0" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OUCode" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="7"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CaseInitiationType" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="80"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DateOfHearing" type="xsd:date" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--===========================-->
+	<!-- CASE HEARING INFORMATION      -->
+	<!--===========================-->
+	<xsd:complexType name="LibraHearingType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Case Hearing Type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="SessionTimes" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+<!--			<xsd:element name="ChargeDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+				<xsd:documentation>SJP - Also known as Date of Issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element> 
+-->		
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--=========================-->
+	<!-- OFFENCE INFORMATION           -->
+	<!--=========================-->
+	<xsd:complexType name="LibraOffenceType">
+		<xsd:annotation>
+			<xsd:documentation>Libra Offence Type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OffenceCode" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OffenceShortTitle" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="120"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="WelshOffenceShortTitle" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>			
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="120"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OffenceWording" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="WelshOffenceWording" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>SJP</xsd:documentation>
+				</xsd:annotation>			
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="4000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OffenceSequenceNumber" minOccurs="1" maxOccurs="1">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

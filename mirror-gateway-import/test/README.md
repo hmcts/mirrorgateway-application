@@ -1,0 +1,1 @@
+This directory contains a test directory structure and some test data files used by the functional test suite.

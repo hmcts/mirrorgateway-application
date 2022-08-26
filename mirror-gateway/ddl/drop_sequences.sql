@@ -1,0 +1,1 @@
+-- Not required for PostgreSQL as drop_database.sql drops everything

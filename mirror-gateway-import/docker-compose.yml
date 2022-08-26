@@ -1,0 +1,56 @@
+
+mgw:
+  build: mirror_gateway  
+  ports:
+    - "9990:9990"
+    - "8080:8080"
+  links:
+    - postgres:db
+  extra_hosts:
+    - db:wildflydb
+  environment:
+    - POSTGRES_HOST=db
+    - POSTGRES_USER=makeaplea
+    - POSTGRES_PASS=password
+    - POSTGRES_PORT=5432
+    - POSTGRES_DB=makeaplea
+    - WILDFLY_MANAGEMENT_USER=mgmtuser
+    - WILDFLY_MANAGEMENT_PASS=mgmtpass
+    - WILDFLY_APPLICATION_USER=appuser
+    - WILDFLY_APPLICATION_PASS=apppass
+    - POSTGRES_CONNECTION_STRING=jdbc:postgresql://db:5432/makeaplea
+
+mgw_dequeue:
+  build: message_consumer
+  links:
+    - mgw:mgw
+  environment:
+    - WILDFLY_APPLICATION_USER=appuser
+    - WILDFLY_APPLICATION_PASS=apppass
+    - MGW_HOST=mgw:8080
+
+mgw_import:
+  build: . 
+  environment:
+    - ARCHIVE_DIR=/archive
+    - STATUS_DIR=/data/receipts
+
+    - LOG_DIR=/data/logs
+
+    - API_USERNAME=localtest
+    - API_PASSWORD=testpassword
+    - API_ENDPOINT=http://localhost:8000
+
+    - EMAIL_FROM=ian.george@digital.justice.gov.uk
+    - EMAIL_TO=lyndon.garvey@digital.justice.gov.uk
+
+    - GPG_HOME_DIRECTORY=/root
+    - GPG_RECIPIENT=lyndon.garvey@digital.justice.gov.uk
+
+    - RELEASE_STAGE=staging
+
+postgres:
+  image: postgres:9.4
+  environment:
+    - POSTGRES_USER=makeaplea
+    - POSTGRES_PASSWORD=password
