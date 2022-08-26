@@ -1,22 +1,4 @@
 java:
-  applicationPort: 4550
-  aadIdentityName: makeaplea-mirror-gateway
-  readinessPath: '/health/readiness'
   # Don't modify below here
-  image: 'sdshmctspublic.azurecr.io/makeaplea/mirror-gateway:latest'
-  environment:
-    POSTGRES_SSL_MODE: require
-    APPLICATIONINSIGHTS_CONFIGURATION_FILE: /mnt/secrets/makeaplea-mirror-gateway/app-insights-config
-  keyVaults:
-    "makeaplea-mirror-gateway":
-      secrets:
-        - name: mirror-gateway-POSTGRES-DATABASE
-          alias: POSTGRES_DATABASE
-        - name: mirror-gateway-POSTGRES-HOST
-          alias: POSTGRES_HOST
-        - name: mirror-gateway-POSTGRES-USER
-          alias: POSTGRES_USER
-        - name: mirror-gateway-POSTGRES-PASS
-          alias: POSTGRES_PASSWORD
-        - name: mirror-gateway-app-insights-config
-          alias: app-insights-config
+  image: ${IMAGE_NAME}
+  ingressHost: ${SERVICE_FQDN}

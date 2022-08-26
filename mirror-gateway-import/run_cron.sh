@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd /makeaplea_dx
+cd /mirror-gateway-import
 
 python ./save_env.py > ./env_vars.sh
 

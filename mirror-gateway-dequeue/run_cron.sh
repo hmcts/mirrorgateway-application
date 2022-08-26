@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python save_env.py > /MessageConsumer/env_vars.sh
+python save_env.py > /mirror-gateway-dequeue/env_vars.sh
 
 cron -f &
 

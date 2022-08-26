@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /MessageConsumer
+cd /mirror-gateway-dequeue
 
 source env_vars.sh
 

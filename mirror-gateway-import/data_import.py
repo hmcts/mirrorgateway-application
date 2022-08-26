@@ -580,8 +580,8 @@ def process_incoming_data(settings):
         {2}
         """.format(ex_type, ex, tb_formatted)
 
-        send_email("FATAL ERROR ref: {}".format(import_ref),
-                   error_msg, settings=settings)
+        # send_email("FATAL ERROR ref: {}".format(import_ref),
+        #            error_msg, settings=settings)
 
         sys.exit(1)
 
@@ -589,11 +589,11 @@ def process_incoming_data(settings):
         log_file.close()
 
     compressed = compress_log(log_path)
-    send_email(
-        "DX data import ref: {}".format(import_ref),
-        data_import.get_summary(),
-        settings=settings,
-        files=([compressed.read(), "dx_report-{}.csv.zip".format(import_ref)], ))
+    # send_email(
+    #     "DX data import ref: {}".format(import_ref),
+    #     data_import.get_summary(),
+    #     settings=settings,
+    #     files=([compressed.read(), "dx_report-{}.csv.zip".format(import_ref)], ))
 
     # CGI have configured the soap gateway so that we will always receive a set
     # of files.  During weekends and holiday periods those files may be empty,

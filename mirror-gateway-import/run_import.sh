@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /makeaplea_dx
+cd /mirror-gateway-import
 
 source env_vars.sh
 
